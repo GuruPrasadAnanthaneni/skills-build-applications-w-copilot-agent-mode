@@ -23,7 +23,7 @@ app.get('/', (_req, res) => {
 
 const codespaceName = process.env.CODESPACE_NAME;
 const localUrl = `http://localhost:${port}`;
-const codespaceUrl = codespaceName ? `https://${port}-${codespaceName}.githubpreview.dev` : null;
+const codespaceUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : null;
 
 connectDb()
   .then(() => {
