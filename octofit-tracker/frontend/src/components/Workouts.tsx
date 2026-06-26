@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchApi } from '../lib/api';
+import { apiBaseUrl } from '../lib/api';
 
 type Workout = {
   name?: string;
@@ -14,7 +14,13 @@ export default function Workouts() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchApi<Workout>('workouts', 'workouts')
+    fetch(`${apiBaseUrl}/workouts/`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`API request failed (${response.status}) for ${apiBaseUrl}/workouts/`);
+        }
+        return response.json();
+      })
       .then(setWorkouts)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));

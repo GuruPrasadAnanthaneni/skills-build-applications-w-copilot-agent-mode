@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchApi } from '../lib/api';
+import { apiBaseUrl } from '../lib/api';
 
 type Activity = {
   type?: string;
@@ -15,7 +15,13 @@ export default function Activities() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchApi<Activity>('activities', 'activities')
+    fetch(`${apiBaseUrl}/activities/`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`API request failed (${response.status}) for ${apiBaseUrl}/activities/`);
+        }
+        return response.json();
+      })
       .then(setActivities)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
