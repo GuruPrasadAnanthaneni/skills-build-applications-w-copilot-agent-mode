@@ -5,7 +5,7 @@ import Leaderboard from './components/Leaderboard';
 import Teams from './components/Teams';
 import Users from './components/Users';
 import Workouts from './components/Workouts';
-import { codespaceName } from './lib/api';
+import { apiBaseUrl, codespaceName } from './lib/api';
 
 function App() {
   return (
@@ -15,11 +15,11 @@ function App() {
         <p className="lead">Modern fitness tracking for teams, workouts, and leaderboards.</p>
         {codespaceName ? (
           <div className="alert alert-info">
-            Using API host for codespace <strong>{codespaceName}</strong>.
+            Using API endpoint <strong>{apiBaseUrl}</strong> for codespace <strong>{codespaceName}</strong>.
           </div>
         ) : (
           <div className="alert alert-warning">
-            VITE_CODESPACE_NAME is not set. Falling back to <code>http://localhost:8000/api</code>.
+            VITE_CODESPACE_NAME is not set. Falling back to <code>{apiBaseUrl}</code>.
             Define it in <code>frontend/.env.local</code> or <code>.env.local</code>.
           </div>
         )}
@@ -28,32 +28,32 @@ function App() {
       <nav className="mb-4">
         <ul className="nav nav-pills flex-wrap gap-2">
           <li className="nav-item">
-            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/users" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/users" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Users
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/teams" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/teams" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Teams
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/activities" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/activities" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Activities
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/workouts" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/workouts" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Workouts
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/leaderboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+            <NavLink to="/leaderboard" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               Leaderboard
             </NavLink>
           </li>

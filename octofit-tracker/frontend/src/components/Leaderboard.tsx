@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { apiBaseUrl } from '../lib/api';
+import { fetchApi } from '../lib/api';
 
 type LeaderboardEntry = {
   rank?: number;
@@ -13,13 +13,7 @@ export default function Leaderboard() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${apiBaseUrl}/leaderboard/`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`API request failed (${response.status}) for ${apiBaseUrl}/leaderboard/`);
-        }
-        return response.json();
-      })
+    fetchApi<LeaderboardEntry>('leaderboard')
       .then(setEntries)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));

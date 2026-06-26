@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { apiBaseUrl } from '../lib/api';
+import { fetchApi } from '../lib/api';
 
 type Team = {
   name?: string;
@@ -13,13 +13,7 @@ export default function Teams() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${apiBaseUrl}/teams/`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`API request failed (${response.status}) for ${apiBaseUrl}/teams/`);
-        }
-        return response.json();
-      })
+    fetchApi<Team>('teams')
       .then(setTeams)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));

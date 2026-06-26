@@ -12,15 +12,22 @@ function normalizeArrayResponse<T>(data: unknown, key: string): T[] {
     return data;
   }
 
-  if (data && typeof data === 'object' && key in data) {
-    const value = (data as Record<string, unknown>)[key];
-    return Array.isArray(value) ? value : [];
+  if (data && typeof data === 'object') {
+    const record = data as Record<string, unknown>;
+    const candidates = [key, 'data', 'results', 'items'];
+
+    for (const candidate of candidates) {
+      const value = record[candidate];
+      if (Array.isArray(value)) {
+        return value;
+      }
+    }
   }
 
   return [];
 }
 
-export async function fetchApi<T>(component: string, responseKey: string): Promise<T[]> {
+export async function fetchApi<T>(component: string, responseKey = component): Promise<T[]> {
   const url = buildApiUrl(component);
   const response = await fetch(url);
 

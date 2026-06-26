@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { apiBaseUrl } from '../lib/api';
+import { fetchApi } from '../lib/api';
 
 type User = {
   name?: string;
@@ -15,13 +15,7 @@ export default function Users() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${apiBaseUrl}/users/`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`API request failed (${response.status}) for ${apiBaseUrl}/users/`);
-        }
-        return response.json();
-      })
+    fetchApi<User>('users')
       .then(setUsers)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
