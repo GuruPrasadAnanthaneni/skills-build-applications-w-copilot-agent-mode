@@ -5,7 +5,7 @@ import Leaderboard from './components/Leaderboard';
 import Teams from './components/Teams';
 import Users from './components/Users';
 import Workouts from './components/Workouts';
-import { apiBaseUrl, codespaceName } from './lib/api';
+import { API_BASE, codespace } from './lib/api';
 
 function App() {
   return (
@@ -13,13 +13,13 @@ function App() {
       <header className="mb-4">
         <h1>OctoFit Tracker</h1>
         <p className="lead">Modern fitness tracking for teams, workouts, and leaderboards.</p>
-        {codespaceName ? (
+        {codespace ? (
           <div className="alert alert-info">
-            Using API endpoint <strong>{apiBaseUrl}</strong> for codespace <strong>{codespaceName}</strong>.
+            Using API endpoint <strong>{API_BASE}</strong> for codespace <strong>{codespace}</strong>.
           </div>
         ) : (
           <div className="alert alert-warning">
-            VITE_CODESPACE_NAME is not set. Falling back to <code>{apiBaseUrl}</code>.
+            VITE_CODESPACE_NAME is not set. Falling back to <code>{API_BASE}</code>.
             Define it in <code>frontend/.env.local</code> or <code>.env.local</code>.
           </div>
         )}

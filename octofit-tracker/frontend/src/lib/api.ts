@@ -1,10 +1,10 @@
-export const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim();
-export const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
+export const codespace = import.meta.env.VITE_CODESPACE_NAME?.trim();
+export const API_BASE = codespace
+  ? `https://${codespace}-8000.app.github.dev/api`
   : 'http://localhost:8000/api';
 
 export function buildApiUrl(component: string) {
-  return `${apiBaseUrl}/${component}/`;
+  return `${API_BASE}/${component}`;
 }
 
 function normalizeArrayResponse<T>(data: unknown, key: string): T[] {
