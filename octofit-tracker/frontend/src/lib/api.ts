@@ -4,7 +4,7 @@ export const apiBaseUrl = codespaceName
   : 'http://localhost:8000/api';
 
 export function buildApiUrl(component: string) {
-  return `${apiBaseUrl}/${component}/`;
+  return `${apiBaseUrl}/${component}`;
 }
 
 function normalizeArrayResponse<T>(data: unknown, key: string): T[] {
