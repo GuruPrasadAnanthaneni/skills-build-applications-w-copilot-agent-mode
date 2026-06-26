@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { fetchApi } from '../lib/api';
 
 type Team = {
   name?: string;
@@ -13,8 +12,20 @@ export default function Teams() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchApi<Team>('teams')
-      .then(setTeams)
+    const codespace = import.meta.env.VITE_CODESPACE_NAME;
+    const API_BASE = codespace
+      ? `https://${codespace}-8000.app.github.dev/api`
+      : 'http://localhost:8000/api';
+
+    fetch(`${API_BASE}/teams`)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        const items = Array.isArray(data) ? data : data.items || data.data || data.teams || [];
+        setTeams(items);
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
