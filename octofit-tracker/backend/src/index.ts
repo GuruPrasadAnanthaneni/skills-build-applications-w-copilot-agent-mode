@@ -22,17 +22,15 @@ app.get('/', (_req, res) => {
 });
 
 const codespaceName = process.env.CODESPACE_NAME;
-const localUrl = `http://localhost:${port}`;
-const codespaceUrl = codespaceName ? `https://${codespaceName}-8000.app.github.dev` : null;
+const backendUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : `http://localhost:${port}`;
 
 connectDb()
   .then(() => {
     console.log('Connected to MongoDB at', mongoUri);
     app.listen(port, host, () => {
-      console.log(`Server listening on ${localUrl}`);
-      if (codespaceUrl) {
-        console.log(`Codespaces API URL: ${codespaceUrl}`);
-      }
+      console.log(`Server listening on ${backendUrl}`);
     });
   })
   .catch((error) => {
