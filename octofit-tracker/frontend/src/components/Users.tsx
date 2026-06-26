@@ -19,7 +19,7 @@ export default function Users() {
       ? `https://${codespace}-8000.app.github.dev/api`
       : 'http://localhost:8000/api';
 
-    fetch(`${API_BASE}/users`)
+    fetch(`${API_BASE}/users/`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();

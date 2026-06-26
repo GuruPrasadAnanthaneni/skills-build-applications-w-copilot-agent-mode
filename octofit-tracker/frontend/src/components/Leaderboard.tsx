@@ -17,7 +17,7 @@ export default function Leaderboard() {
       ? `https://${codespace}-8000.app.github.dev/api`
       : 'http://localhost:8000/api';
 
-    fetch(`${API_BASE}/leaderboard`)
+    fetch(`${API_BASE}/leaderboard/`)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
