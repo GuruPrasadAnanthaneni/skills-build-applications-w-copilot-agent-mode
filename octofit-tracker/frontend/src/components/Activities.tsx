@@ -3,9 +3,9 @@ import { fetchApi } from '../lib/api';
 
 type Activity = {
   type?: string;
-  duration?: number;
-  notes?: string;
-  createdAt?: string;
+  durationMinutes?: number;
+  calories?: number;
+  completedAt?: string;
   user?: { name?: string; email?: string };
 };
 
@@ -35,18 +35,18 @@ export default function Activities() {
                 <th>Type</th>
                 <th>Duration</th>
                 <th>User</th>
-                <th>Notes</th>
-                <th>Logged</th>
+                <th>Calories</th>
+                <th>Completed</th>
               </tr>
             </thead>
             <tbody>
               {activities.map((activity, idx) => (
                 <tr key={`${activity.type ?? 'activity'}-${idx}`}>
                   <td>{activity.type ?? 'Unknown'}</td>
-                  <td>{activity.duration != null ? `${activity.duration} min` : 'N/A'}</td>
+                  <td>{activity.durationMinutes != null ? `${activity.durationMinutes} min` : 'N/A'}</td>
                   <td>{activity.user?.name ?? activity.user?.email ?? 'Unknown'}</td>
-                  <td>{activity.notes ?? '—'}</td>
-                  <td>{activity.createdAt ? new Date(activity.createdAt).toLocaleString() : 'Unknown'}</td>
+                  <td>{activity.calories != null ? `${activity.calories} cal` : '—'}</td>
+                  <td>{activity.completedAt ? new Date(activity.completedAt).toLocaleString() : 'Unknown'}</td>
                 </tr>
               ))}
             </tbody>

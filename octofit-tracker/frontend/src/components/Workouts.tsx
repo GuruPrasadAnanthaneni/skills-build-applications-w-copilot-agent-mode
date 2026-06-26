@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { fetchApi } from '../lib/api';
 
 type Workout = {
-  name?: string;
+  title?: string;
   durationMinutes?: number;
-  difficulty?: string;
-  description?: string;
+  level?: string;
+  focus?: string;
 };
 
 export default function Workouts() {
@@ -31,19 +31,19 @@ export default function Workouts() {
           <table className="table table-striped align-middle">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Duration</th>
-                <th>Difficulty</th>
-                <th>Description</th>
+                <th>Level</th>
+                <th>Focus</th>
               </tr>
             </thead>
             <tbody>
               {workouts.map((workout, idx) => (
-                <tr key={`${workout.name ?? 'workout'}-${idx}`}>
-                  <td>{workout.name ?? 'Unnamed'}</td>
+                <tr key={`${workout.title ?? 'workout'}-${idx}`}>
+                  <td>{workout.title ?? 'Unnamed'}</td>
                   <td>{workout.durationMinutes != null ? `${workout.durationMinutes} min` : 'N/A'}</td>
-                  <td>{workout.difficulty ?? 'N/A'}</td>
-                  <td>{workout.description ?? '—'}</td>
+                  <td>{workout.level ?? 'N/A'}</td>
+                  <td>{workout.focus ?? '—'}</td>
                 </tr>
               ))}
             </tbody>
